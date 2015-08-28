@@ -1,10 +1,17 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_tags, only: [:index, :new, :edit]
 
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    if params[:tags]
+      # TODO make react query ?tags[]=1&tags[]=7&format=json
+      tags_name = ActsAsTaggableOn::Tag.find(params[:tags]).map(&:name)
+      @images = Image.tagged_with(tags_name)
+    else
+      @images = Image.all
+    end
   end
 
   # GET /images/1
@@ -67,8 +74,12 @@ class ImagesController < ApplicationController
       @image = Image.find(params[:id])
     end
 
+    def set_tags
+      @tags = ActsAsTaggableOn::Tag.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:author, :file, :url)
+      params.require(:image).permit(:author, :file, :url, {tag_list: []})
     end
 end

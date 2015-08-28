@@ -7,12 +7,17 @@
 
 <p>
   <strong>File:</strong>
-  <%= image_tag @image.file.url %>
+  <%= image_tag @image.file.url(:large) %>
 </p>
 
 <p>
   <strong>Url:</strong>
   <%= @image.url %>
+</p>
+
+<p>
+  <strong>tags:</strong>
+  <%= @image.tag_list %>
 </p>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |

@@ -15,7 +15,23 @@
     <%= f.label :author %><br>
     <%= f.text_field :author %>
   </div>
+
   <div class="field">
+    <%= f.label :tag_list %>
+    <ul>
+      <%- @tags.each do |tag| %>
+        <li>
+          <%= check_box_tag 'image[tag_list][]', tag.name, @image.tag_list.include?(tag.name) %>
+          <%= tag.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="field">
+    <% if @image.file.present? %>
+      <%= image_tag @image.file.url(:large) %>
+    <% end %>
     <%= f.label :file %><br>
     <%= f.file_field :file %>
   </div>
