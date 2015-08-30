@@ -17,16 +17,9 @@ class AppContainer extends React.Component {
     this.fetchImages(this.context.router.getCurrentQuery());
   }
 
-  addFilter (tag) {
-    if (tag.props.tag.id) {
-      this.setState({
-        currentTags: [tag.props.tag.id]
-      }, this.fetchImages);
-    } else {
-      this.setState({
-        currentTags: []
-      }, this.fetchImages);
-    }
+  handleChange () {
+    var tags = this.refs.tags.getCheckedValues();
+    this.context.router.transitionTo('/', {}, {tags: tags});
   }
 
   fetchImages (query) {
@@ -41,7 +34,8 @@ class AppContainer extends React.Component {
   }
 
   render () {
-    var images;
+    var images,
+        tagIds = this.context.router.getCurrentQuery().tags;
 
     if (this.state.images.length) {
       images = (
@@ -56,12 +50,21 @@ class AppContainer extends React.Component {
     return (
       <div className="content">
         <div className="col col-2 bg-gray p2">
-          <Tag onAddFilter={this.addFilter.bind(this)} />
-          {this.state.tags.map(function (tag) {
-            return (
-              <Tag tag={tag} onAddFilter={this.addFilter.bind(this)} key={tag.id} />
-            )
-          }.bind(this))}
+          <CheckboxGroup
+            ref="tags"
+            name="tags"
+            value={tagIds}
+            onChange={this.handleChange.bind(this)}
+          >
+            {this.state.tags.map(function (tag) {
+              return (
+                <div key={tag.id}>
+                  <input type="checkbox" value={tag.id} />
+                  {tag.name}
+                </div>
+              );
+            }.bind(this))}
+          </CheckboxGroup>
         </div>
         <div className="col col-10">
           { images }
@@ -74,7 +77,3 @@ class AppContainer extends React.Component {
 AppContainer.contextTypes = {
   router: React.PropTypes.func
 };
-
-// AppContainer.willTransitionTo = function (transition, params, query, callback) {
-//   debugger;
-// };
