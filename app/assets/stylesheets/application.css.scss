@@ -4,6 +4,7 @@
 body {
   margin: 0;
 }
+
 .images {
   img {
     display: inline-block;
@@ -18,4 +19,31 @@ body {
 
 .images:hover img:hover {
   opacity: 1;
+}
+#imagearea {
+	padding:0px;
+	margin:40px;
+	border:1px solid #ccc;
+}
+
+.imageContainer {
+	margin: 3px;
+	-webkit-user-select: none;
+	position: relative;
+	float: left;
+	padding: 0px;
+}
+
+.imageContainer a {
+	margin: 0px;
+	padding: 0px;
+}
+
+.imageContainer div:hover {
+	-webkit-box-shadow: #d90 0px 0px 6px 2px;
+	-moz-box-shadow: #d90 0px 0px 6px 2px;
+	box-shadow: #d90 0px 0px 6px 2px;
+	-webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
+	-moz-transition: -moz-box-shadow 0.3s ease-in-out;
+	transition: box-shadow 0.3s ease-in-out;
 }

@@ -46,7 +46,6 @@ GEM
     basscss-rails (2.0.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (6.0.2)
     carrierwave (0.10.0)
@@ -168,7 +167,6 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
   basscss-rails
-  bower-rails
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)

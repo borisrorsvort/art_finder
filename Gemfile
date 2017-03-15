@@ -26,10 +26,9 @@ gem 'carrierwave'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'mini_magick'
 gem "react-rails"
+gem 'react-router-rails', '~>0.13.3.1'
 gem 'basscss-rails'
 gem 'haml'
-gem 'bower-rails'
-gem 'react-router-rails', '~>0.13.3.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

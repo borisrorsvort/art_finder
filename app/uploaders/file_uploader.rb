@@ -9,7 +9,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
-
+  process :store_dimensions
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -34,10 +34,12 @@ class FileUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   version :thumb do
     process :resize_to_fit => [50, 50]
+    process :store_dimensions
   end
 
   version :large do
     process :resize_to_fit => [200, 200]
+    process :store_dimensions
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -51,5 +53,13 @@ class FileUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  private
+
+  def store_dimensions
+    if file && model
+      model.width, model.height = `identify -format "%wx%h" #{file.path}`.split(/x/)
+    end
+  end
 
 end

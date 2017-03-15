@@ -66,7 +66,7 @@ class AppContainer extends React.Component {
             }.bind(this))}
           </CheckboxGroup>
         </div>
-        <div className="col col-10">
+        <div className="col col-10 picrow bg-green">
           { images }
         </div>
       </div>
